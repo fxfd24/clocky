@@ -1,4 +1,4 @@
-# Clocky - A Kid-Friendly Sleep Training Clock
+# Clocky - A Kid-Friendly Sleep Training Clock for Guition JC8048W550C_I
 
 A fun ESP32-based sleep training clock that helps children know when it's time to wake up or go to bed using friendly Spider-Man animations and color changes. Built for the Guition JC8048W550C_I ESP32-S3 5-inch IPS display board.
 
