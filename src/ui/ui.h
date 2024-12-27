@@ -1,4 +1,3 @@
-// src/ui/ui.h
 #ifndef _SQUARELINE_PROJECT_UI_H
 #define _SQUARELINE_PROJECT_UI_H
 
@@ -26,11 +25,14 @@ extern "C"
     extern lv_obj_t *ui_lblDate;
     extern lv_obj_t *ui_Rotate;
     extern lv_obj_t *ui_Label1;
-    extern lv_obj_t *ui_sun;          // Added
-    extern lv_obj_t *ui_moon;         // Added
-    extern lv_obj_t *ui_lblWakeTime;  // Added
-    extern lv_obj_t *ui_lblSleepTime; // Added
+    extern lv_obj_t *ui_sun;
+    extern lv_obj_t *ui_moon;
+    extern lv_obj_t *ui_lblWakeTime;
+    extern lv_obj_t *ui_lblSleepTime;
     extern lv_obj_t *ui____initial_actions0;
+    // Time control groups with consistent ui_ prefix
+    extern lv_obj_t *ui_wake_group;
+    extern lv_obj_t *ui_sleep_group;
 
     void ui_init(void);
 

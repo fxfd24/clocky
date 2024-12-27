@@ -4,11 +4,10 @@
 #include <time.h>
 #include <WiFi.h>
 #include "config.h"
+#include "parent_control.h"
 
-// Forward declarations
-static void cleanup_animation(lv_anim_t *anim);
-static void update_background(bool isDay);
-static lv_anim_t fade_animation;  // Static animation object
+
+static lv_anim_t fade_animation; // Static animation object
 // ============= Global Variables and Constants =============
 // Animation and UI elements
 static lv_obj_t *spiderman_img = NULL;
@@ -70,17 +69,15 @@ static void init_pattern_style()
     }
 }
 
-
-
-static lv_anim_t* create_fade_animation(lv_obj_t *obj, uint32_t start_value, uint32_t end_value, uint32_t duration) {
+static lv_anim_t *create_fade_animation(lv_obj_t *obj, uint32_t start_value, uint32_t end_value, uint32_t duration)
+{
     lv_anim_init(&fade_animation);
     lv_anim_set_var(&fade_animation, obj);
     lv_anim_set_values(&fade_animation, start_value, end_value);
     lv_anim_set_time(&fade_animation, duration);
-    lv_anim_set_exec_cb(&fade_animation, [](void *obj, int32_t v) {
-        lv_obj_set_style_img_opa((lv_obj_t *)obj, v, 0);
-    });
-    
+    lv_anim_set_exec_cb(&fade_animation, [](void *obj, int32_t v)
+                        { lv_obj_set_style_img_opa((lv_obj_t *)obj, v, 0); });
+
     return &fade_animation;
 }
 
@@ -108,16 +105,19 @@ void showSpidermanPopup()
     }
 }
 
-void hideSpidermanPopup() {
-    if (spiderman_img != NULL) {
+void hideSpidermanPopup()
+{
+    if (spiderman_img != NULL)
+    {
         lv_anim_t *anim = create_fade_animation(spiderman_img, 255, 0, 500);
-        if (anim) {
-            lv_anim_set_ready_cb(anim, [](lv_anim_t *a) {
+        if (anim)
+        {
+            lv_anim_set_ready_cb(anim, [](lv_anim_t *a)
+                                 {
                 if (a && a->var) {
                     lv_obj_del((lv_obj_t*)a->var);
                     spiderman_img = NULL;
-                }
-            });
+                } });
             lv_anim_start(anim);
         }
     }
@@ -146,16 +146,19 @@ void showSpidermanSleepPopup()
     }
 }
 
-void hideSpidermanSleepPopup() {
-    if (spidermansleep_img != NULL) {
+void hideSpidermanSleepPopup()
+{
+    if (spidermansleep_img != NULL)
+    {
         lv_anim_t *anim = create_fade_animation(spidermansleep_img, 255, 0, 500);
-        if (anim) {
-            lv_anim_set_ready_cb(anim, [](lv_anim_t *a) {
+        if (anim)
+        {
+            lv_anim_set_ready_cb(anim, [](lv_anim_t *a)
+                                 {
                 if (a && a->var) {
                     lv_obj_del((lv_obj_t*)a->var);
                     spidermansleep_img = NULL;
-                }
-            });
+                } });
             lv_anim_start(anim);
         }
     }
@@ -388,6 +391,10 @@ void setup()
         log_w("%s: Continuing without time sync", TAG);
     }
 
+    init_parent_control();
+    create_settings_button();
+    create_pin_keypad();
+
     // Initialize timing variables for the main loop
     next_clock_update = millis() + 1000;
     lv_last_tick = millis();
@@ -432,6 +439,7 @@ void loop()
             last_reconnect_attempt = now;
         }
     }
+    check_unlock_timeout();
 
     // Small delay to prevent watchdog issues
     delay(5);

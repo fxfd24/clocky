@@ -29,7 +29,7 @@ A fun ESP32-based sleep training clock that helps children know when it's time t
 
 1. Clone the repository with submodules:
    ```bash
-   git clone --recurse-submodules https://github.com/[your-username]/clocky.git
+   git clone --recurse-submodules https://github.com/mattjohnpowell/clocky.git
    ```
 
 2. Copy `config.h.local` to `config.h` and update with your settings:
