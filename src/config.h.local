@@ -4,6 +4,9 @@
 #define WIFI_SSID ""
 #define WIFI_PASSWORD "" 
 
+// Add with other configuration
+#define PARENT_PIN "1234"  // Change this to your desired PIN
+
 // Timezone Configuration
 
 #define TIMEZONE_LONDON "GMT0BST,M3.5.0/1,M10.5.0"    // London
